@@ -18,7 +18,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "html/*"
-          target: "~/front/html"
+          target: "~/front"
           rm: true
       - name: Copy files via ssh password
         uses: appleboy/scp-action@v0.1.7
@@ -28,5 +28,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "nginx/*"
-          target: "~/nginx"
+          target: "~"
           rm: true
