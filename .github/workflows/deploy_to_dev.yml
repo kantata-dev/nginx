@@ -41,9 +41,9 @@ jobs:
             docker stop nginx || true
             docker rm nginx || true
             docker run -d \
-              -- name nginx \
+              --name nginx \
               -p 80:80 \
-              -v ~/front/html/:/usr/share/nginx/html/ \
-              -v ~/nginx/nginx/conf-files/:/etc/nginx/conf.d/ \
-              -v ~/nginx/nginx.conf:/etc/nginx/nginx.conf \
+              -v /home/github/front/html/:/usr/share/nginx/html/ \
+              -v /home/github/nginx/nginx/conf-files/:/etc/nginx/conf.d/ \
+              -v /home/github/nginx/nginx.conf:/etc/nginx/nginx.conf \
               nginx
