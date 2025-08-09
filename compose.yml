@@ -1,0 +1,20 @@
+services:
+  proxy-server:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - /root/kantata/nginx/html/files/:/usr/share/nginx/html/
+      - /root/kantata/nginx/project/nginx.conf:/etc/nginx/nginx.conf
+      - /root/kantata/nginx/project/conf-files/:/etc/nginx/conf.d/
+    networks:
+      - nginx_net
+
+networks:
+  nginx_net:
+    driver: bridge
+    name: nginx_net
+
+
