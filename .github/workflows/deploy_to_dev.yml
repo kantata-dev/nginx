@@ -30,3 +30,20 @@ jobs:
           source: "nginx/*"
           target: "~/nginx"
           strip_components: 1
+      - name: Execute Docker Run via SSH
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            docker stop nginx || true
+            docker rm nginx || true
+            docker run -d \
+              -- name nginx \
+              -p 80:80 \
+              -v ~/front/html/:/usr/share/nginx/html/ \
+              -v ~/nginx/nginx/conf-files/:/etc/nginx/conf.d/ \
+              -v ~/nginx/nginx.conf:/etc/nginx/nginx.conf \
+              nginx
