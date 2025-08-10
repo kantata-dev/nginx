@@ -40,8 +40,10 @@ jobs:
           script: |
             docker stop nginx || true
             docker rm nginx || true
+            docker network create nginx_net || true
             docker run -d \
               --name nginx \
+              --network nginx_net \
               -p 80:80 \
               -v /home/github/front/html/:/usr/share/nginx/html/ \
               -v /home/github/nginx/conf-files/:/etc/nginx/conf.d/ \
